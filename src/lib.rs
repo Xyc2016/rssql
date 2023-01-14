@@ -1,14 +1,23 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
+pub mod constants {
+    pub const PROMPT: &str = "rssql> ";
+    pub mod command {
+        pub const EXIT: &str = ".exit";
+    }
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+pub mod utils {
+    use std::io::{self, Write};
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+    pub fn read_line() -> String {
+        let mut input = String::new();
+        io::stdout().flush().unwrap();
+        io::stdin().read_line(&mut input).unwrap();
+        input.trim().to_string()
+    }
+}
+
+pub mod interact {
+    pub fn print_prompt() {
+        print!("{}", super::constants::PROMPT);
     }
 }
