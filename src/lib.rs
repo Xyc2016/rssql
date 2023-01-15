@@ -20,4 +20,17 @@ pub mod interact {
     pub fn print_prompt() {
         print!("{}", super::constants::PROMPT);
     }
+    pub fn on_exit() {
+        println!("Bye!");
+    }
+    pub fn repl() {
+        loop {
+            crate::interact::print_prompt();
+            let command = super::utils::read_line();
+            match command.as_str() {
+                crate::constants::command::EXIT => break,
+                _ => println!("Unrecognized command '{}'", command),
+            }
+        }
+    }
 }
